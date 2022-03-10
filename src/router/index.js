@@ -1,19 +1,45 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 
 const routes = [
+  //  User Pages
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    component: () => import('../views/LoginView.vue'),
   },
+  //  DashBoard Pages
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/admin',
+    component: () => import('../views/DashboardView.vue'),
+    children: [
+      {
+        path: 'products',
+        component: () => import('../views/DashboardProducts.vue'),
+      },
+      {
+        path: 'product/:productId',
+        component: () => import('../views/DashboardProduct.vue'),
+      },
+      {
+        path: 'orders',
+        component: () => import('../views/DashboardOrders.vue'),
+      },
+      {
+        path: 'coupons',
+        component: () => import('../views/DashboardCoupons.vue'),
+      },
+      {
+        path: 'articles',
+        component: () => import('../views/DashboardArticles.vue'),
+      },
+      {
+        path: 'article/:articleId',
+        component: () => import('../views/DashboardArticle.vue'),
+      },
+      {
+        path: 'cart',
+        component: () => import('../views/FrontCart.vue'),
+      },
+    ],
   },
 ];
 
